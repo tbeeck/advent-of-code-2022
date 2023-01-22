@@ -1,5 +1,4 @@
-(ns day01
-  (:require [java-time.api :as t]))
+(ns day01)
 
 (defn read-stdin
   []
