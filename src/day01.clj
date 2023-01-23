@@ -2,7 +2,7 @@
 
 (defn parse-line
   [line]
-  (try 
+  (try
     (read-string line)
     (catch Exception e nil)))
 
@@ -11,9 +11,9 @@
   (loop [input (read-line) acc []]
     (if (= nil input)
       acc
-      (recur 
-        (read-line) 
-        (conj acc (parse-line input))))))
+      (recur
+       (read-line)
+       (conj acc (parse-line input))))))
 
 (defn partition-calories
   "Parse lines into groups of numbers and filter dividers"
@@ -25,11 +25,11 @@
   [calorie-groups]
   (if (empty? calorie-groups)
     0
-    (max 
-      (apply + (peek calorie-groups))
-      (max-calories-from-groups (pop calorie-groups)))))
+    (max
+     (apply + (peek calorie-groups))
+     (max-calories-from-groups (pop calorie-groups)))))
 
 (defn run [opts]
-  (println 
-    (max-calories-from-groups 
-      (partition-calories (read-stdin)))))
+  (println
+   (max-calories-from-groups
+    (partition-calories (read-stdin)))))
