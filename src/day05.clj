@@ -36,9 +36,19 @@
 				(read-line)
 				(conj acc (parse-second-chunk-line input))))))
 
+(defn apply-instruction
+	[stacks, instruction]
+	)
+
 (defn solve
 	[stacks instructions]
-	[stacks, instructions])
+	[stacks, instructions]
+	(loop [s stacks remaining-instrs instructions]
+		(if (= remaining-instrs '[])
+			s
+			(recur
+				(apply-instruction (peek remaining-instrs s))
+				(pop remaining-instrs)))))
 
 (defn run [opts]
   (def stacks (read-first-chunk))
