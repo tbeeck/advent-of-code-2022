@@ -8,7 +8,7 @@
 
 (defn parse-first-chunk-line
 	[line, stacks]
-	(conj stacks {(count line) line}))
+	)
 
 (defn parse-second-chunk-line
 	[line]
@@ -22,7 +22,7 @@
   []
   (loop [input (read-line) stacks {}]
     (if (= "" input)
-      stacks
+      (reverse-values stacks)
       (recur
        (read-line)
        (parse-first-chunk-line input stacks)))))
@@ -41,16 +41,16 @@
 	)
 
 (defn solve
-	[stacks instructions]
 	[stacks, instructions]
-	(loop [s stacks remaining-instrs instructions]
-		(if (= remaining-instrs '[])
+	(loop [ins instructions s stacks]
+		(if (= ins '[])
 			s
 			(recur
-				(apply-instruction (peek remaining-instrs s))
-				(pop remaining-instrs)))))
+				(pop ins)
+				(apply-instruction s (peek ins))))))
 
 (defn run [opts]
-  (def stacks (read-first-chunk))
-  (def instructions (read-second-chunk))
-  (println (solve stacks instructions)))
+    (def stacks (read-first-chunk))
+    (def instructions (read-second-chunk))
+	(println stacks)
+    (println (solve stacks instructions)))
